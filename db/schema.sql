@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS techTalking_bd;
-CREATE DATABASE techTalking_db;
+DROP DATABASE IF EXISTS techtalking_bd;
+CREATE DATABASE techtalking_db;

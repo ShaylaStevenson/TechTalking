@@ -1,3 +1,4 @@
+// base code referenced from mini project
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');

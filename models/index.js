@@ -1,3 +1,4 @@
+// base code referenced from mini project
 const User = require('./User');
 const Blog = require('./Blog');
 
