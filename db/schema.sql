@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS techTalking_bd;
+CREATE DATABASE techTalking_db;
