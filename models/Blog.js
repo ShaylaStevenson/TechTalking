@@ -24,11 +24,6 @@ Blog.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
-    // this will hold the comments for a blog
-    comments: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
