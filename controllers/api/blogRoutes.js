@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { Blog } = require('../../models');
-//const withAuth = require('../../utils/auth');
-// , withAuth
-router.post('/', async (req, res) => {
+const withAuth = require('../../utils/auth');
+ 
+// create a new blog
+router.post('/', withAuth, async (req, res) => {
   try {
     const newBlog = await Blog.create({
       ...req.body,
@@ -14,8 +15,9 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
-//, withAuth
-router.delete('/:id', async (req, res) => {
+
+// delete a blog
+router.delete('/:id', withAuth, async (req, res) => {
   try {
     const blogData = await Blog.destroy({
       where: {
