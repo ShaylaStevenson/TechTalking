@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-// get all projects to display when visiting page
+// get all blogs to display when visiting homepage
 router.get('/', async (req, res) => {
   try {
     const blogData = await Blog.findAll({
@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// get a blog by id
+// get the page showing a single blog
 router.get('/blog/:id', async (req, res) => {
   try {
     const blogData = await Blog.findByPk(req.params.id, {
@@ -39,8 +39,10 @@ router.get('/blog/:id', async (req, res) => {
       ],
     });
 
+    // serialize the data
     const blog = blogData.get({ plain: true });
 
+    // return blog
     res.render('blog', {
       ...blog,
       logged_in: req.session.logged_in

@@ -1,6 +1,63 @@
 // base code from mini project
 const router = require('express').Router();
+const { BelongsTo } = require('sequelize/types');
 const { User } = require('../../models');
+
+// get all users
+// get user by id
+// create new user
+// login
+// logout
+
+// get all users
+router.get('/', async (req, res) => {
+  try {
+    const userData = await User.findAll({
+      include: [
+        {
+          model: Blog,
+          attributes: ['title'],
+        },
+      ],
+    }),
+
+    // serialize the data
+    const users = userData.map((user) => user.get({ plain: true }));
+
+    // pass serialized data and session flag into template
+    res.render('/', {
+      users,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get user by id
+router.get('/user/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      include: [
+        {
+          model: Blog,
+          attributes: ['title'],
+        },
+      ],
+    });
+
+    // serialize the data
+    const user = user.data.get({ plain: true });
+
+    // return user
+    res.render('user', {
+      ...user,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // create new user
 router.post('/', async (req, res) => {
@@ -9,6 +66,7 @@ router.post('/', async (req, res) => {
 
     // login to start session
     req.session.save(() => {
+      req.session.user_id = userData.id;
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
@@ -23,8 +81,14 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     // find saved user by user_name
-    const userData = await User.findOne({ where: { user_name: req.body.user_name } });
+    const userData = await User.findOne(
+      {
+        where: {
+          user_name: req.body.user_name
+        } 
+      });
 
+    // check for username
     if (!userData) {
       res
         .status(400)
@@ -45,6 +109,7 @@ router.post('/login', async (req, res) => {
     // login and start session
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.user_name = userData.user_name;
       req.session.logged_in = true;
       
       res.json({ user: userData, message: 'You are now logged in!' });
