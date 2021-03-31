@@ -1,6 +1,5 @@
 // base code from mini project
 const router = require('express').Router();
-const { BelongsTo } = require('sequelize/types');
 const { User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
@@ -20,7 +19,7 @@ router.get('/', async (req, res) => {
           attributes: ['title'],
         },
       ],
-    }),
+    });
 
     // serialize the data
     const users = userData.map((user) => user.get({ plain: true }));

@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
           attributes: ['user_name'],
         },
       ],
-    }),
+    });
 
     // serialize data
     const blogs = blogData.map((blog) => blog.get({ plain: true }));
