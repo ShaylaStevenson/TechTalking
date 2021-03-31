@@ -3,10 +3,10 @@ const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 // get all blogs
-// create a blog
-// edit a blog
+// todo -maybe create a blog
+// todo edit a blog
 
-// get all of the blogs, with auth, using session id
+// get all of the blogs for dashboard page, with auth, using session id
 router.get('/', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.findAll({

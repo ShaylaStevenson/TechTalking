@@ -2,6 +2,7 @@
 const router = require('express').Router();
 const { BelongsTo } = require('sequelize/types');
 const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // get all users
 // get user by id

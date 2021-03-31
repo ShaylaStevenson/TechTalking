@@ -2,6 +2,11 @@ const router = require('express').Router();
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+// get all blogs
+// get blog by id
+// login
+// signup
+
 // get all blogs to display when visiting homepage
 router.get('/', async (req, res) => {
   try {

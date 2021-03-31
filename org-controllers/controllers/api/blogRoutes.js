@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const { Blog } = require('../../models');
 const withAuth = require('../../utils/auth');
+
+// get all blogs
+// get blog by id
+// create a blog
+// edit blog
+// delete blog
  
 // create a new blog
 router.post('/', withAuth, async (req, res) => {
