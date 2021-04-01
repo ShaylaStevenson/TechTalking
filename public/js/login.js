@@ -18,6 +18,7 @@ const loginFormHandler = async (event) => {
         document.location.replace('/dashboard');
       } else {
         alert(response.statusText);
+        console.log('issue here');
       }
     }
   };
