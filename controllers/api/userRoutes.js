@@ -47,7 +47,7 @@ router.get('/user/:id', async (req, res) => {
     });
 
     // serialize the data
-    const user = user.data.get({ plain: true });
+    const user = userData.map((user) => user.get({ plain: true }));
 
     // return user
     res.render('user', {
@@ -67,7 +67,7 @@ router.post('/', async (req, res) => {
     // login to start session
     req.session.save(() => {
       req.session.user_id = userData.id;
-      req.session.user_id = userData.id;
+      req.session.user_name = userData.user_name;
       req.session.logged_in = true;
 
       res.status(200).json(userData);
@@ -88,7 +88,7 @@ router.post('/login', async (req, res) => {
         } 
       });
 
-    // check for username
+    // check for user_name
     if (!userData) {
       res
         .status(400)
@@ -132,3 +132,4 @@ router.post('/logout', (req, res) => {
 });
 
 module.exports = router;
+

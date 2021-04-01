@@ -43,5 +43,5 @@ const newFormHandler = async (event) => {
   
   document
     .querySelector('.blog-list')
-    //.addEventListener('click', delButtonHandler);
+    .addEventListener('click', delButtonHandler);
   
